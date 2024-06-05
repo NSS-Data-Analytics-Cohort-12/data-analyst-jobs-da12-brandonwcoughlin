@@ -18,27 +18,89 @@ limit 10
 
 select location
 from data_analyst_jobs
-where location = 'TN'
+where location = 'TN' OR location = 'KY'
 
---21	
+--27	
 
 4.	How many postings in Tennessee have a star rating above 4?
 
+select location, star_rating
+from data_analyst_jobs
+where location = 'TN' 
+	and star_rating > 4
+
+--3	
+
 5.	How many postings in the dataset have a review count between 500 and 1000?
+
+select review_count
+from data_analyst_jobs
+where review_count between 500 and 1000;	
+
+--151
 
 6.	Show the average star rating for companies in each state. The output should show the state as `state` and the average rating for the state as `avg_rating`. Which state shows the highest average rating?
 
+select 
+	avg(star_rating) as avg_rating, 
+	location as state
+from data_analyst_jobs	
+group by location
+order by avg_rating desc
+	
+--NE	
+	
+	
 7.	Select unique job titles from the data_analyst_jobs table. How many are there?
+
+select distinct(title)
+from data_analyst_jobs	
+
+--881	
 
 8.	How many unique job titles are there for California companies?
 
+select distinct(title)	
+from data_analyst_jobs
+where location = 'CA';	
+
+--230
+	
 9.	Find the name of each company and its average star rating for all companies that have more than 5000 reviews across all locations. How many companies are there with more that 5000 reviews across all locations?
 
+select company,
+	avg(star_rating)
+from data_analyst_jobs
+where review_count > 5000
+group by company;
+
+--41
+	
 10.	Add the code to order the query in #9 from highest to lowest average star rating. Which company with more than 5000 reviews across all locations in the dataset has the highest star rating? What is that rating?
 
+select company,
+	avg(star_rating)
+from data_analyst_jobs
+where review_count > 5000
+group by company
+order by avg(star_rating) desc;	
+
+--General Motors
+	
 11.	Find all the job titles that contain the word ‘Analyst’. How many different job titles are there? 
 
+select title
+from data_analyst_jobs
+where title like '%Analyst%';	
+
+--1636
+
 12.	How many different job titles do not contain either the word ‘Analyst’ or the word ‘Analytics’? What word do these positions have in common?
+
+select title
+from data_analyst_jobs
+where title not like '%Analyst%' and title not like '%analytics%'
+	
 
 **BONUS:**
 You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks. 
