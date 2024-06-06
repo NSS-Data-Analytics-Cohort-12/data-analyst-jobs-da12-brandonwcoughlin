@@ -99,8 +99,14 @@ where title like '%Analyst%';
 
 select title
 from data_analyst_jobs
-where title not like '%Analyst%' and title not like '%analytics%'
-	
+where title not like '%Analyst%' 
+	and title not like '%Analytics%'
+	and title not like '%ANALYST%'
+	and title not like '%analyst%'
+	and title not like '%ANALYTICS%'
+	and title not like '%analytics%'
+
+--They all include the word "Tableau"	
 
 **BONUS:**
 You want to understand which jobs requiring SQL are hard to fill. Find the number of jobs by industry (domain) that require SQL and have been posted longer than 3 weeks. 
